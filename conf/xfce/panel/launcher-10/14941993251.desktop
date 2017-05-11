@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=i3 Config
+Comment=
+Exec=gedit config
+Icon=accessories-text-editor-symbolic
+Path=/home/i3_xfce/.i3
+Terminal=false
+StartupNotify=false
