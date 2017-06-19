@@ -6,7 +6,7 @@ check_root() {
 	if [ "$EUID" -ne 0 ]; then echo "Please run as root."; exit; fi; 
 }
 
-add_respositories() {
+add_repositories() {
 	add-apt-repository -y ppa:aacebedo/libi3ipc-glib
 	add-apt-repository -y ppa:aacebedo/xfce4-i3-workspaces-plugin
 	apt-get update
