@@ -1,3 +1,6 @@
+INIT_ENV_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd );
+source "$INIT_ENV_DIR/conf/env.sh"
+
 fcp() { 
 	mkdir -p "$2" && \cp -rf "$1" "${2%/}/$3"; 
 }
@@ -22,31 +25,18 @@ install_all() {
 }
 
 setup_i3() {
-	cd i3/
-	fcp i3.desktop $XFCE_AUTOSTART_PATH
-	fcp config $I3_CONFIG_PATH
-	cd ..
+  i3_path=$INIT_ENV_DIR/conf/i3
+	fcp $i3_path/i3.desktop $XFCE_AUTOSTART_PATH
+	fcp $i3_path/. $I3_CONFIG_PATH
 }
 
 setup_xfce() {
-	cd xfce/
-	fcp xfce4-keyboard-shortcuts.xml $XFCE_CONFIG_PATH
-	fcp xfce4-session-host:0 $XFCE_SESSIONS_PATH xfce4-session-$HOSTNAME:0
-	setup_xfce_panel
-	cd ..
-}
-
-setup_xfce_panel() {
-	cd panel/
-	fcp xfce4-panel.xml $XFCE_CONFIG_PATH
-	fcp launcher-10 $XFCE_PANEL_PLUGINS_PATH
-	fcp i3-workspaces.-9.rc $XFCE_PANEL_PLUGINS_PATH
-	cd ..
+  xfce_path=$INIT_ENV_DIR/conf/xfce
+	fcp $xfce_path/xfce4-keyboard-shortcuts.xml $XFCE_CONFIG_PATH
+	fcp $xfce_path/xfce4-session-host:0 $XFCE_SESSIONS_PATH xfce4-session-$HOSTNAME:0
 }
 
 setup_all() {
-	cd conf/
 	setup_i3
 	setup_xfce
-	cd ..
 }
